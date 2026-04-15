@@ -1,0 +1,11 @@
+{
+  "name": "heathen-household-services",
+  "private": true,
+  "workspaces": ["heathen-site"],
+  "scripts": {
+    "dev": "npm run dev -w heathen-site",
+    "build": "npm run build -w heathen-site",
+    "start": "npm run start -w heathen-site",
+    "lint": "npm run lint -w heathen-site"
+  }
+}
