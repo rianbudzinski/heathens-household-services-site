@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+:root {
+  --background: 0 0% 4%;
+  --foreground: 120 100% 98%;
+  --card: 0 0% 8%;
+  --card-foreground: 0 0% 98%;
+  --primary: 120 100% 35%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 70%;
+  --border: 0 0% 20%;
+  --radius: 0.5rem;
+  --heathen-green: #00b200;
+  /** Neon lime — matches live marketing / screenshots */
+  --heathen-accent: #39ff14;
+  --heathen-gold: #ffd700;
+  --heathen-green-dark: #008800;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-heathen-green: var(--heathen-green);
+  --color-heathen-accent: var(--heathen-accent);
+  --color-heathen-gold: var(--heathen-gold);
+  --color-heathen-green-dark: var(--heathen-green-dark);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.textured-bg {
+  background-color: #000;
+  background-image: radial-gradient(rgba(0, 178, 0, 0.1) 2px, transparent 2px);
+  background-size: 30px 30px;
+}
+
+.custom-glow {
+  filter: drop-shadow(0 0 14px rgba(57, 255, 20, 0.55)) drop-shadow(0 0 28px rgba(57, 255, 20, 0.25));
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transform: skew(-25deg);
+  animation: shine 4s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.service-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 178, 0, 0.3);
+}
+
+.gradient-brand {
+  background-image: linear-gradient(to right, var(--heathen-green), var(--heathen-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/** Hero scroll cue — text + arrow move together */
+@keyframes bounce-scroll {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 10px, 0);
+  }
+}
+
+.bounce-scroll-indicator {
+  animation: bounce-scroll 1.75s ease-in-out infinite;
+  will-change: transform;
+}
