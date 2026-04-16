@@ -11,12 +11,14 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { SITE, SITE_BASE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Heathen Household Services—quality workmanship, licensed and insured, serving Western New York.",
+  alternates: { canonical: `${SITE_BASE_URL}/about` },
+  openGraph: { url: `${SITE_BASE_URL}/about` },
 };
 
 const VALUE_CARDS = [
@@ -148,13 +150,15 @@ export default function AboutPage() {
                   construction, landscaping, or property maintenance, Heathen Rentals provides reliable,
                   well-maintained equipment backed by the Heathen name you already trust.
                 </p>
-                <Link
-                  href="/contact"
+                <a
+                  href="https://heathenrentals.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-shine mt-8 inline-flex items-center gap-2 rounded-md bg-heathen-accent px-6 py-3 font-semibold text-white shadow-[0_0_24px_rgba(57,255,20,0.35)] hover:brightness-110"
                 >
                   Visit Heathen Rentals
                   <ExternalLink className="h-4 w-4" />
-                </Link>
+                </a>
               </div>
 
               <div className="rounded-lg border border-heathen-accent/50 bg-black/60 p-6 md:p-8">

@@ -13,6 +13,15 @@ export const SITE = {
   pixelGuysUrl: "https://pixelguys.dev",
 } as const;
 
+/** Canonical site origin (matches production domain). */
+export const SITE_BASE_URL = "https://heathenhouseholdservices.com" as const;
+
+/** E.164 telephone for schema.org and structured data. */
+export const SITE_PHONE_E164 = "+17164500085" as const;
+
+/** Frewsburg area ZIP for LocalBusiness schema (optional; improves local SEO). */
+export const SITE_ADDRESS_ZIP = "14738" as const;
+
 export const BUSINESS_HOURS = [
   "Monday - Friday: 8:00 AM - 6:00 PM",
   "Saturday: 9:00 AM - 4:00 PM",
@@ -39,6 +48,29 @@ export const SERVICE_AREAS = [
   "Mayville, NY",
   "Frewsburg, NY",
 ] as const;
+
+export function serviceAreaSlug(areaLabel: string): string {
+  return areaLabel
+    .toLowerCase()
+    .trim()
+    .replace(/\s*,\s*/g, "-")
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+}
+
+export function serviceAreaBySlug(slug: string): string | undefined {
+  return SERVICE_AREAS.find((a) => serviceAreaSlug(a) === slug);
+}
+
+/** Homepage grid uses short names (e.g. “Frewsburg”); map to full “City, ST” slug. */
+export function shortAreaNameToSlug(shortName: string): string {
+  const full = SERVICE_AREAS.find((a) => a.startsWith(shortName.trim()));
+  return full ? serviceAreaSlug(full) : serviceAreaSlug(`${shortName.trim()}, NY`);
+}
+
+export function allServiceAreaSlugs(): string[] {
+  return SERVICE_AREAS.map((a) => serviceAreaSlug(a));
+}
 
 /** Hero + “Our Services” preview row (3 cards) */
 export const FEATURED_SERVICES = [

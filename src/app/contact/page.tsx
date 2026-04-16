@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
-import { BUSINESS_HOURS, SITE } from "@/lib/site";
+import { BUSINESS_HOURS, SITE, SITE_BASE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
     "Contact Heathen Household Services for a free quote—remodels, cleaning, landscaping, and more.",
+  alternates: { canonical: `${SITE_BASE_URL}/contact` },
+  openGraph: { url: `${SITE_BASE_URL}/contact` },
 };
 
 export default function ContactPage() {

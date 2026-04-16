@@ -59,6 +59,16 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
+              <Link href="/blog" className="hover:text-heathen-accent">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/service-areas" className="hover:text-heathen-accent">
+                Service Areas
+              </Link>
+            </li>
+            <li>
               <Link href="/about" className="hover:text-heathen-accent">
                 About Us
               </Link>

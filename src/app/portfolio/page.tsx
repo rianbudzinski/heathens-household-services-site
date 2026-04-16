@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Phone, Star } from "lucide-react";
 import { PortfolioGrid } from "@/components/portfolio-grid";
-import { SITE, TESTIMONIALS } from "@/lib/site";
+import { SITE, SITE_BASE_URL, TESTIMONIALS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Our Portfolio",
   description:
     "Explore our completed projects and see the quality and craftsmanship we bring to every job.",
+  alternates: { canonical: `${SITE_BASE_URL}/portfolio` },
+  openGraph: { url: `${SITE_BASE_URL}/portfolio` },
 };
 
 export default function PortfolioPage() {

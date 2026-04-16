@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -15,9 +16,18 @@ import {
   FEATURED_SERVICES,
   SERVICE_AREAS_GRID,
   SITE,
+  SITE_BASE_URL,
+  shortAreaNameToSlug,
   TESTIMONIALS,
   WHY_CHOOSE_HOME,
 } from "@/lib/site";
+
+export const metadata: Metadata = {
+  description:
+    "Professional home & commercial services in Western New York. Licensed & insured—remodels, exteriors, concrete, landscaping, Buffalo to Chautauqua County. Call 716-450-0085.",
+  alternates: { canonical: SITE_BASE_URL },
+  openGraph: { url: SITE_BASE_URL },
+};
 
 const FEATURE_ICONS = [Wrench, Droplets, Fence] as const;
 
@@ -192,13 +202,21 @@ export default function HomePage() {
           <ul className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-4 md:grid-cols-3">
             {SERVICE_AREAS_GRID.map((a) => (
               <li key={a}>
-                <span className="block rounded-lg border-2 border-heathen-gold bg-transparent px-4 py-3 text-center text-sm font-medium text-white">
+                <Link
+                  href={`/service-areas/${shortAreaNameToSlug(a)}`}
+                  className="block rounded-lg border-2 border-heathen-gold bg-transparent px-4 py-3 text-center text-sm font-medium text-white transition hover:bg-heathen-gold/10"
+                >
                   {a}
-                </span>
+                </Link>
               </li>
             ))}
           </ul>
           <p className="mt-8 text-lg font-semibold text-heathen-accent">&amp; ALL Surrounding Areas</p>
+          <p className="mt-4">
+            <Link href="/service-areas" className="text-sm font-medium text-heathen-accent hover:text-heathen-gold">
+              View all service area pages
+            </Link>
+          </p>
         </div>
       </section>
 

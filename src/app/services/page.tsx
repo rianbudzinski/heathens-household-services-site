@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Hammer, Phone } from "lucide-react";
 import { OUR_PROCESS_STEPS, SERVICES_PAGE_ITEMS } from "@/lib/services-list";
-import { SITE } from "@/lib/site";
+import { SITE, SITE_BASE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Our Services",
   description:
     "We provide a wide range of professional services to meet all your household needs with quality and efficiency.",
+  alternates: { canonical: `${SITE_BASE_URL}/services` },
+  openGraph: { url: `${SITE_BASE_URL}/services` },
 };
 
 export default function ServicesPage() {
