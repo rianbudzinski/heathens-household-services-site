@@ -1,7 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { SERVICES_PAGE_ITEMS } from "@/lib/services-list";
+
+/** Matches live “Service of Interest” options on the contact form. */
+const SERVICE_INTEREST_OPTIONS = [
+  "Remodels",
+  "Roof Cleaning",
+  "Power Washing",
+  "Decks & Fences",
+  "Custom Tile Showers",
+  "Holiday Decoration",
+  "Other",
+] as const;
 
 const inputClass =
   "w-full rounded-md border border-zinc-700 bg-[#0a0a0a] px-4 py-3 text-white placeholder:text-gray-500 focus:border-heathen-accent focus:outline-none focus:ring-1 focus:ring-heathen-accent/50";
@@ -80,9 +90,9 @@ export function ContactForm() {
             <option value="" disabled>
               -- Select a service --
             </option>
-            {SERVICES_PAGE_ITEMS.map((s) => (
-              <option key={s.title} value={s.title}>
-                {s.title}
+            {SERVICE_INTEREST_OPTIONS.map((label) => (
+              <option key={label} value={label}>
+                {label}
               </option>
             ))}
           </select>
