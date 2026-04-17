@@ -13,15 +13,56 @@ const SERVICE_INTEREST_OPTIONS = [
   "Other",
 ] as const;
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xzdyeygk";
+
 const inputClass =
   "w-full rounded-md border border-zinc-700 bg-[#0a0a0a] px-4 py-3 text-white placeholder:text-gray-500 focus:border-heathen-accent focus:outline-none focus:ring-1 focus:ring-heathen-accent/50";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSent(true);
+    const form = e.currentTarget;
+    setError(null);
+    setSubmitting(true);
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
+
+      const data = (await res.json()) as {
+        ok?: boolean;
+        error?: string;
+        errors?: string[] | Record<string, string>;
+      };
+
+      if (res.ok && data.ok) {
+        setSent(true);
+        form.reset();
+        return;
+      }
+
+      let msg = "Something went wrong. Please try again or call us.";
+      if (typeof data.error === "string") msg = data.error;
+      else if (Array.isArray(data.errors)) msg = data.errors.join(" ");
+      else if (data.errors && typeof data.errors === "object") {
+        msg = Object.entries(data.errors)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join(" ");
+      }
+      setError(msg);
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (sent) {
@@ -37,6 +78,15 @@ export function ContactForm() {
     <div className="rounded-lg border border-zinc-800 bg-[#0a0a0a] p-6 md:p-8">
       <h2 className="text-xl font-bold text-heathen-accent">Send Us a Message</h2>
       <form onSubmit={onSubmit} className="mt-8 space-y-5">
+        <input type="hidden" name="_subject" value="Heathen Household Services — website contact" />
+        {error ? (
+          <div
+            role="alert"
+            className="rounded-md border border-red-500/50 bg-red-950/40 px-4 py-3 text-sm text-red-200"
+          >
+            {error}
+          </div>
+        ) : null}
         <div>
           <label htmlFor="name" className="mb-2 block text-sm font-medium text-white">
             Name
@@ -113,9 +163,10 @@ export function ContactForm() {
         <div className="flex justify-end pt-2">
           <button
             type="submit"
-            className="btn-shine rounded-md bg-heathen-accent px-8 py-3 font-semibold text-white shadow-[0_0_20px_rgba(57,255,20,0.25)] transition hover:brightness-110"
+            disabled={submitting}
+            className="btn-shine rounded-md bg-heathen-accent px-8 py-3 font-semibold text-white shadow-[0_0_20px_rgba(57,255,20,0.25)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Send Message
+            {submitting ? "Sending…" : "Send Message"}
           </button>
         </div>
       </form>
