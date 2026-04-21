@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, Phone, User, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 const NAV = [
@@ -66,13 +66,6 @@ export function SiteHeader() {
             <Phone className="h-4 w-4" />
             {SITE.phoneDisplay}
           </a>
-          <Link
-            href="/admin"
-            className="inline-flex items-center gap-2 rounded-md border border-white/30 bg-transparent px-3 py-2 text-sm font-medium text-white transition hover:border-white/60"
-          >
-            <User className="h-4 w-4" />
-            Admin
-          </Link>
         </div>
 
         <button
@@ -107,14 +100,6 @@ export function SiteHeader() {
               <Phone className="h-4 w-4" />
               {SITE.phoneDisplay}
             </a>
-            <Link
-              href="/admin"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/30 py-3 font-medium text-white"
-              onClick={() => setOpen(false)}
-            >
-              <User className="h-4 w-4" />
-              Admin
-            </Link>
           </nav>
         </div>
       ) : null}
