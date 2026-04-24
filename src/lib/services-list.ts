@@ -24,11 +24,6 @@ export const SERVICES_PAGE_ITEMS: ServiceItem[] = [
     description: "Custom decks and durable fencing to enhance your outdoor space.",
   },
   {
-    title: "Demolition",
-    description:
-      "Safe and controlled demolition services for buildings, structures, and debris removal.",
-  },
-  {
     title: "Drainage & Ponds",
     description:
       "Expert drainage solutions and pond installations to manage water flow on your property.",
@@ -135,7 +130,6 @@ export const SERVICES_PAGE_ITEMS: ServiceItem[] = [
     title: "Site Work",
     description:
       "Expert site work services including clearing, grading, and excavation preparation.",
-    highlight: true,
   },
   {
     title: "Striping & Sealing",
