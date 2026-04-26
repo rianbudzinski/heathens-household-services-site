@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -11,6 +10,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { MeasurementConverter } from "@/components/measurement-converter";
+import { BrandLogo } from "@/components/brand-logo";
 import {
   BUSINESS_HOURS,
   FEATURED_SERVICES,
@@ -38,8 +38,7 @@ export default function HomePage() {
       <section className="relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center bg-black px-6 py-16 text-center">
         <div className="relative z-10 flex max-w-4xl flex-col items-center">
           <div className="custom-glow mb-10 w-full max-w-md md:max-w-lg">
-            <Image
-              src={SITE.logoUrl}
+            <BrandLogo
               alt="Heathen Household Services"
               width={640}
               height={400}

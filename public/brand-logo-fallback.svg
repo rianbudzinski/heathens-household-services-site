@@ -1,0 +1,13 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="28" fill="#050505"/>
+  <rect x="16" y="16" width="608" height="328" rx="20" stroke="#39ff14" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="320" y="165" text-anchor="middle" fill="#39ff14" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="800" letter-spacing="3">
+    HEATHEN
+  </text>
+  <text x="320" y="218" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" letter-spacing="2">
+    HOUSEHOLD SERVICES
+  </text>
+  <text x="320" y="268" text-anchor="middle" fill="#ffd700" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" letter-spacing="1.2">
+    PROFESSIONAL HOME SERVICES
+  </text>
+</svg>

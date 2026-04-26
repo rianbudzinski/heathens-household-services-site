@@ -6,8 +6,7 @@ export const SITE = {
   email: "Huntinheath1428@yahoo.com",
   addressLine1: "727 Warren Rd",
   addressLine2: "Frewsburg, NY, United States",
-  logoUrl:
-    "https://heathenhouseholdservices.com/lovable-uploads/e6b702a8-227b-450d-a910-c8f576855554.png",
+  logoUrl: "/household%20logo.jpg",
   ogImage:
     "https://i.postimg.cc/FRwZnhXN/430775657-361667176861393-2808929438620456387-n.jpg",
   pixelGuysUrl: "https://pixelguys.dev",

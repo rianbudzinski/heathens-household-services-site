@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
+import { BrandLogo } from "@/components/brand-logo";
 import { SITE } from "@/lib/site";
 
 const NAV = [
@@ -28,8 +28,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur-sm">
       <div className="relative mx-auto flex h-16 max-w-[1400px] items-center px-6">
         <Link href="/" className="z-10 flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
-          <Image
-            src={SITE.logoUrl}
+          <BrandLogo
             alt="Heathen Household Services"
             width={48}
             height={48}
