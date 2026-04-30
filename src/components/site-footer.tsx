@@ -25,8 +25,8 @@ export function SiteFooter() {
             </div>
           </div>
           <p className="text-sm leading-relaxed text-gray-300">
-            Professional equipment rental services for construction, landscaping, and property
-            maintenance needs.
+            Licensed and insured household services for remodeling, exterior work, cleaning, and
+            property maintenance.
           </p>
           <a
             href="https://facebook.com"

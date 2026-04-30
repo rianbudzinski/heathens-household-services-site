@@ -2,19 +2,31 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink, Filter } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ChevronLeft, ChevronRight, ExternalLink, Filter, X } from "lucide-react";
 import type { PortfolioFilter } from "@/lib/site";
 import { PORTFOLIO_FILTERS, PORTFOLIO_ITEMS } from "@/lib/site";
 
 export function PortfolioGrid() {
   const [cat, setCat] = useState<PortfolioFilter>("All");
   const [filtersOpen, setFiltersOpen] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<{ url: string; title: string } | null>(null);
 
   const filtered = useMemo(() => {
     if (cat === "All") return PORTFOLIO_ITEMS;
     return PORTFOLIO_ITEMS.filter((p) => p.filter === cat);
   }, [cat]);
+
+  useEffect(() => {
+    if (!selectedImage) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedImage(null);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedImage]);
 
   return (
     <div className="space-y-8">
@@ -92,12 +104,13 @@ export function PortfolioGrid() {
                   <h3 className="text-lg font-bold text-white">{item.title}</h3>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-gray-300">{item.description}</p>
                   <div className="mt-5 grid grid-cols-2 gap-3">
-                    <Link
-                      href="/contact"
+                    <button
+                      type="button"
+                      onClick={() => setSelectedImage({ url: item.imageUrl, title: item.title })}
                       className="inline-flex items-center justify-center rounded-md border border-heathen-accent bg-transparent py-2.5 text-center text-sm font-medium text-white transition hover:bg-heathen-accent/10"
                     >
                       View Photos
-                    </Link>
+                    </button>
                     <Link
                       href="/contact"
                       className="inline-flex items-center justify-center gap-1.5 rounded-md border border-heathen-accent bg-transparent py-2.5 text-center text-sm font-medium text-white transition hover:bg-heathen-accent/10"
@@ -112,6 +125,36 @@ export function PortfolioGrid() {
           ))}
         </ul>
       )}
+      {selectedImage ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
+          onClick={() => setSelectedImage(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedImage.title} photo preview`}
+        >
+          <div className="relative w-full max-w-6xl" onClick={(event) => event.stopPropagation()}>
+            <button
+              type="button"
+              onClick={() => setSelectedImage(null)}
+              className="absolute right-2 top-2 z-10 rounded-full bg-black/70 p-2 text-white transition hover:bg-black"
+              aria-label="Close image preview"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-white/20 bg-black">
+              <Image
+                src={selectedImage.url}
+                alt={selectedImage.title}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
